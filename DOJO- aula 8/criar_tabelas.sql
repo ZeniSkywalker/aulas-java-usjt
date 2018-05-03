@@ -1,0 +1,32 @@
+CREATE DATABASE tutorial;
+USE tutorial;
+
+CREATE TABLE cliente (
+  id     SMALLINT UNSIGNED NOT NULL,
+  nome   VARCHAR(60) NOT NULL,
+  fone   CHAR(10),
+  PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+CREATE TABLE pedido (
+  id         SMALLINT UNSIGNED NOT NULL,
+  data       DATE NOT NULL,
+  valor      NUMERIC (10, 2) NOT NULL,
+  id_cliente SMALLINT UNSIGNED NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+ALTER TABLE pedido ADD FOREIGN KEY (id_cliente)
+  REFERENCES cliente (id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT;
+  
+INSERT INTO cliente VALUES (14, 'Adriano Arruda', '1322444422');
+INSERT INTO pedido VALUES 
+(1401, '2015-10-01', 1045.77, 14),
+(1402, '2015-10-02', 210.00, 14),
+(1403, '2015-10-05', 38.90, 14),
+(1404, '2015-10-05', 12.01, 14);
+
+SELECT * from CLIENTE C, PEDIDO P WHERE C.id = P.id_cliente;
+
